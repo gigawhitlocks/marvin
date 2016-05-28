@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	session "github.com/gigawhitlocks/marvin/session"
+	bot "github.com/gigawhitlocks/marvin/bot"
 )
 
 var (
@@ -19,7 +19,7 @@ func init() {
 }
 
 func main() {
-	s := &session.Session{}
+	s := &bot.Session{}
 	s.Logon(username, password, server)
 	s.JoinChannel("GENERAL")
 	s.Say("GENERAL", "test")
