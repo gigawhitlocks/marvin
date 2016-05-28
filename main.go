@@ -40,7 +40,7 @@ type Message struct {
 func init() {
 	flag.StringVar(&username, "username", "bot", "bot's username")
 	flag.StringVar(&password, "password", "password", "bot's password")
-	flag.StringVar(&server, "server", "https://localhost:3000", "server url")
+	flag.StringVar(&server, "server", "http://localhost:3000", "server url")
 	flag.Parse()
 }
 
