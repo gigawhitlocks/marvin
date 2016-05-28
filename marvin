@@ -1,2 +1,0 @@
-#!/bin/bash
-go run main.go -username="marvin" -password="$(echo $MARVINPW)" -server="https://shouting.online"
