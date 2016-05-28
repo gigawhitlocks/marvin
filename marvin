@@ -1,0 +1,43 @@
+#!/bin/bash
+
+userid="j9rfr6FRzCZwvxR7R"
+url="https://shouting.online"
+
+function refreshToken() {
+    go run main.go -username="marvin" -password="$(echo $MARVINPW)" -server="$url" | cut -d' ' -f2
+}
+
+function join() {
+    curl -H "X-Auth-Token: $(refreshToken)" -H "X-User-Id: $userid" "$url"/api/rooms/"$@"/join -d {}
+}
+
+function leave() {
+    curl -H "X-Auth-Token: $(refreshToken)" -H "X-User-Id: $userid" "$url"/api/rooms/"$@"/leave -d {}
+}
+
+function listRooms() {
+    curl -H "X-Auth-Token: $(refreshToken)" -H "X-User-Id: $userid" "$url"/api/publicRooms
+}
+
+function message() {
+    message="${@:3}"
+    curl -H "Content-Type: application/json" -H "X-Auth-Token: $(refreshToken)"\
+         -H "X-User-Id: $userid" -X POST "$url"/api/rooms/"$1"/send -d "{ \"msg\" : \"$message\" }"
+}
+case "$1" in
+    "join" )
+        join "$2"
+        ;;
+    "leave" )
+        leave "$2"
+        ;;
+    "list" )
+        listRooms
+        ;;
+    "say" )
+        message "${@:2}"
+        ;;
+    *)
+        echo "Usage:"
+        ;;
+esac;

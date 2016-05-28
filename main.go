@@ -55,8 +55,12 @@ func logon() (string, string) {
 	return l.Data.UserId, l.Data.AuthToken
 }
 
+func joinChannel(channelName string) {
+
+}
+
 func main() {
 	userId, authToken := logon()
-	fmt.Println(userId)
-	fmt.Println(authToken)
+	fmt.Printf("%s %s", userId, authToken)
+	joinChannel("general")
 }
